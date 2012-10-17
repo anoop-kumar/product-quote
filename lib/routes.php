@@ -10,8 +10,8 @@ $pq_routes[] = array('cart','cart','pq_cart');
 $pq_routes[] = array('checkout','cart','pq_checkout');
 
 $custom_urls = apply_filters('pq_routes', 'slug','controller', 'function');
-
-$pq_routes = array_merge($pq_routes, $custom_urls);
+if(is_array($custom_urls))
+	$pq_routes = array_merge($pq_routes, $custom_urls);
 
 $url_param = parse_url(site_url().$_SERVER["REQUEST_URI"], PHP_URL_PATH);
 
