@@ -222,39 +222,11 @@ add_action("admin_init", "admin_init");
 add_action("save_post", "save_deal");
 
 	function admin_init(){
-		add_meta_box("dealInfo-meta", "Deal Options", "meta_options", "seller", "normal", "high");
+		add_meta_box(CUSTOM_POST_TYPE1."-meta", CUSTOM_MENU_NAME." Options", "pq_meta_options", CUSTOM_POST_TYPE1, "normal", "high");
 		
 	}
-	function get_post_custom_fields_DDBWP_1()
-							{
-								global $wpdb,$custom_post_meta_db_table_name;
-								$post_meta_info = $wpdb->get_results("select * from $custom_post_meta_db_table_name where is_active=1 and post_type = 'seller' order by sort_order asc,admin_title asc");
-								$return_arr = array();
-								if($post_meta_info){
-									foreach($post_meta_info as $post_meta_info_obj){	
-										if($post_meta_info_obj->ctype){
-											$options = explode(',',$post_meta_info_obj->option_values);
-										}
-										$custom_fields = array(
-												"name"		=> $post_meta_info_obj->htmlvar_name,
-												"label" 	=> $post_meta_info_obj->clabels,
-												"default" 	=> $post_meta_info_obj->default_value,
-												"type" 		=> $post_meta_info_obj->ctype,
-												"desc"      => $post_meta_info_obj->admin_desc,
-												"option_values"      => $post_meta_info_obj->option_values,
-												"site_title"      => $post_meta_info_obj->site_title,
-												);
-										if($options)
-										{
-											$custom_fields["options"]=$options;
-										}
-										$return_arr[$post_meta_info_obj->htmlvar_name] = $custom_fields;
-									}
-								}
-								return $return_arr;
-							}
 	
-	function meta_options(){
+	function pq_meta_options(){
 		
 		global $post;
 	

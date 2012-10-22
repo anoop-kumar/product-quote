@@ -1,4 +1,5 @@
 <?php
+	global $wpdb;
 	if(!defined('CUSTOM_POST_TYPE1')){
 		
 		define('CUSTOM_POST_TYPE1','book');
@@ -44,4 +45,8 @@
 		define('CUSTOM_MENU_TAG_ADD_NEW',__('Add New Book Tags','pq_wp'));
 		define('CUSTOM_MENU_TAG_NEW_ADD',__('New Book Tags Name','pq_wp'));	
 	}
+	
+	if(!defined('ORDER_TRANSACTION_TABLE'))
+		define('ORDER_TRANSACTION_TABLE',$wpdb->prefix."order_transaction");
+	
 ?>

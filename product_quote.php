@@ -34,4 +34,15 @@ if(!defined('PQ_ROOT_PATH')){
 require(PQ_ROOT_PATH."lib/constant.php");
 require(PQ_ROOT_PATH."lib/utility.php");	
 require(PQ_ROOT_PATH."lib/routes.php");	
+require(PQ_ROOT_PATH."lib/db_tables.php");	
+
+/* Runs when plugin is activated */
+register_activation_hook(__FILE__, 'pq_install');
+/* Runs when plugin is de-activated */
+register_deactivation_hook( __FILE__ , 'pq_deactivate' );
+
+add_action('activated_plugin','save_error');
+function save_error(){
+    update_option('plugin_error',  ob_get_contents());
+}
 ?>
